@@ -6,7 +6,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 
-const contactoRoutes = require('./src/routes/contactoRoutes');
+const mainRouter = require('./src/routes/mainRouter');
 
 // Middleware para analizar solicitudes JSON
 server.use(morgan("dev")); 
@@ -14,7 +14,7 @@ server.use(express.json());
 server.use(cors())
 
 // Configura las rutas
-server.use(contactoRoutes);
+server.use(mainRouter);
 
 // Inicia el servidor
 const puerto = process.env.PORT || 5000;
