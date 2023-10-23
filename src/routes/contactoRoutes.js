@@ -3,7 +3,7 @@ const router = Router()
 const contactoController = require('../controllers/contactoController');
 
 // Ruta para enviar correos desde el formulario de contacto
-router.post('/contacto', async (req,res) =>{
+router.post('/contact', async (req,res) =>{
 
     try {
         const result = await contactoController(req.body)

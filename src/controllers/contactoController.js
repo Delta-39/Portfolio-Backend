@@ -26,7 +26,7 @@ const sendMail = async (data) => {
 
     try {
         transporter.sendMail(mailOptions)
-        return 'Mail enviado correctamente'
+        return 'Email sent succesfully!'
     } catch (error) {
         console.log(error)
     }
