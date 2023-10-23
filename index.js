@@ -14,7 +14,7 @@ server.use(express.json());
 server.use(cors())
 
 // Configura las rutas
-server.use('/', contactoRoutes);
+server.use(contactoRoutes);
 
 // Inicia el servidor
 const puerto = process.env.PORT || 5000;

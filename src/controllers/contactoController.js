@@ -1,42 +1,36 @@
-const nodemailer = require('nodemailer');
-const dotenv = require('dotenv');
-const { render } = require("@react-email/render");
-const { Contact } = require('./template/contact.jsx')
+const nodemailer = require('nodemailer')
+const dotenv = require('dotenv')
+
 dotenv.config()
-// Controlador para enviar correos electrónicos desde el formulario de contacto
-const sendEmailHandler = async (data) => {
-    const {
-        name,
-        email,
-        stack,
-        message
-    } = data
+
+const sendMail = async (data) => {
+
+    const {name, email, stack, message} = data
+
+    if(!name || !email || !stack || ! message ) return 'Fields to send email are incomplete'
 
     const transporter = nodemailer.createTransport({
-        host: "smtp-mail.outlook.com",
-        port: 587,
-        secure: false,
+        service: "hotmail",
         auth: {
             user: process.env.SMTP_USER,
-            pass: process.env.SMTP_PASSWORD,
-        },
+            pass: process.env.SMTP_PASSWORD
+        }
     });
-
-    const emailHtml = render(Contact(data))
 
     const mailOptions = {
         from: process.env.SMTP_USER,
         to: process.env.SMTP_USER,
-        contactEmail: email,
-        subject: stack,
-        html: emailHtml,
-    };
-    try {
-        await transporter.sendMail(mailOptions);
-    } catch (error) {
-        throw new error;
+        subject: `Portfolio work ${stack}`,
+        html:`<h1>Hola soy ${name}</h1><h2>Mi email de contacto es ${email}</h2><br><br><h3>Sobre que quiero trabajar:</h3><br><p>${message}</p>`
     }
-    return "Email successfully sent";
+
+    try {
+        transporter.sendMail(mailOptions)
+        return 'Mail enviado correctamente'
+    } catch (error) {
+        console.log(error)
+    }
+
 }
 
-module.exports = sendEmailHandler
+module.exports = sendMail
