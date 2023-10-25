@@ -20,7 +20,7 @@ router.post('/contact', async (req,res) =>{
 //*Route for cv/resume download
 router.get('/pdf',async (req,res)=>{
     try {
-        const pdfPath = path.join(__dirname, '../assets', 'Martin Terribile.pdf')
+        const pdfPath = path.join(__dirname, '../assets', 'Martin Terribile(eng).pdf')
 
         const pdfStream = fs.createReadStream(pdfPath)
 
